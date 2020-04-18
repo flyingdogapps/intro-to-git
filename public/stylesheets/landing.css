@@ -1,0 +1,106 @@
+body{
+  background-color: #000;
+}
+
+#landing-header {
+  /* Z-index is back and forth, so 1 is on top of anything that has Z index smaller than 1 */
+  z-index: 1;
+  position: relative; 
+  /* To use Z index, possition must be different than static which is default */
+  text-align: center;
+
+  padding-top: 40vh;
+  /* This centers the header verticaly, vh is view hight 50 is center but 40 won't push the stuff down */
+}
+#landing-header h1{
+  /* To make the h1 visable on the black background */
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+/* Three lines above make it take the entiry page */
+  top: 0;
+  left: 0;
+  /* nodge it to top left corner */
+  z-index: 0;
+  /* puts it in the background */
+  list-style: none;
+  /* remove the bullet points */
+  margin: 0;
+  padding: 0;
+  /* no margin or padding */
+}
+
+/* Style individual lis */
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* that's reletive to it's parent so cover it */
+  top: 0;
+  left: 0;
+  background-size: cover;
+  /* let images take the entire page */
+  background-position: 50% 50%;
+  /* 5050 centers the images */
+  background-repeat: no-repeat;
+  /* so the images don't repeat verticaly and horizontally */
+  opacity: 0;
+  /* images start at 0 so they can fade in */
+  z-index: 0;
+
+  animation: imageAnimation 20s linear infinite; 
+  /* allows pictures to fade in an out */
+  /* imageAnimation is just a var name */
+  /* 50s is length of animation */
+  /* linear means animation speed will stay constant from beging to end */
+  /* infinite means keep animation going forever */
+}
+/* the first one starts without delay */
+.slideshow li:nth-child(1) { 
+  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  animation-delay: 5s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  animation-delay: 10s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  animation-delay: 15s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  animation-delay: 20s; 
+}
+
+@keyframes imageAnimation { 
+  /* keyframes is what happens through the animation proccess */
+  /* 0% is the begining, 100 is end */
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+    /* the timing-function makes it a smoother transition */
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+    /* the reason it 30% is that the whole cycle is 50sec so at 10s should be fading out alread, and the next slide starts */
+  }
+}
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
